@@ -1,24 +1,27 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
+using ProjectWedding.Abstract;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace ProjectWedding.ViewModels
 {
     public class MainPageViewModel : BindableBase, INavigationAware
     {
-        private string _title;
-        public string Title
+
+        private ObservableCollection<ITabPage> _tabs = new ObservableCollection<ITabPage>();
+        public ObservableCollection<ITabPage> Tabs
         {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
+            get { return _tabs; }
+            set { SetProperty(ref _tabs, value); }
         }
 
         public MainPageViewModel()
         {
-
+           
         }
 
         public void OnNavigatedFrom(NavigationParameters parameters)
@@ -28,8 +31,8 @@ namespace ProjectWedding.ViewModels
 
         public void OnNavigatedTo(NavigationParameters parameters)
         {
-            if (parameters.ContainsKey("title"))
-                Title = (string)parameters["title"] + " and Prism";
+            Tabs.Add(new StartPageViewModel());
+            Tabs.Add(new ProfilePageViewModel());
         }
     }
 }

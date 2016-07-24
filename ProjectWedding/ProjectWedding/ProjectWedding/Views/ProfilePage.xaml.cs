@@ -2,13 +2,11 @@
 
 namespace ProjectWedding.Views
 {
-    public partial class MainPage : TabbedPage
+    public partial class ProfilePage : ContentPage
     {
-        public MainPage()
+        public ProfilePage()
         {
             InitializeComponent();
         }
-
-        
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Prism.Unity;
+using ProjectWedding.ViewModels;
 using ProjectWedding.Views;
+using System;
 
 namespace ProjectWedding
 {
@@ -7,9 +9,8 @@ namespace ProjectWedding
     {
         protected override void OnInitialized()
         {
-            InitializeComponent();
-
-            NavigationService.Navigate("MainPage?title=Hello%20from%20Xamarin.Forms");
+            var startPage = GetPageName<MainPageViewModel>();
+            NavigationService.Navigate(startPage);
         }
 
         protected override void RegisterTypes()
@@ -17,7 +18,10 @@ namespace ProjectWedding
             Container.RegisterTypeForNavigation<MainPage>();
         }
 
-
+        private string GetPageName<T>()
+        {
+            return typeof(T).Name.Replace("ViewModel", string.Empty);
+        }
         
     }
 }
